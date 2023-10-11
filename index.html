@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Customized T-Shirt Order</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        input[type="reset"] {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customized T-Shirt Order</h1>
+    <form onsubmit="return validateForm()">
+        <label for="tagline">Name:</label>
+        <input type="text" id="name" name="tagline" required>
+        <label for="tagline">Phone:</label>
+        <input type="text" id="phone" name="tagline" required>
+        <label for="tagline">Tagline on the shirt:</label>
+        <input type="text" id="tagline" name="tagline" required>
+        
+        <br><br>
+
+        <label>Color:</label><br>
+        <input type="radio" id="Red" name="fav_language" value="Red">
+        <label>Red</label><br>
+        <input type="radio" id="Green" name="fav_language" value="Green">
+        <label>Green</label><br>
+        <input type="radio" id="Blue" name="fav_language" value="Blue">
+        <label>Blue</label><br><br>
+<!--         <label for="favcolor">Select your favorite color:</label>
+        <input type="color" id="favcolor" name="favcolor"><br><br> -->
+
+        <label for="size">Size:</label>
+        <select id="size" name="size" required>
+            <option value="">Select Size</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="xl">XL</option>
+        </select><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" required><br><br>
+
+        <label for="delivery_date">Delivery Date:</label>
+        <input type="date" id="delivery_date" name="delivery_date" required><br><br>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="delivery_details">Address:</label><br>
+        <textarea id="delivery_details" name="delivery_details" rows="4"></textarea><br>
+        <button type="submit">Place Order</button>
+        <input type="reset" value="Reset">
+    </form>
+    <script>
+        function validateForm() {
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const tagline = document.getElementById('tagline').value;
+            const size = document.getElementById('size').value;
+            const quantity = document.getElementById('quantity').value;
+            const delivery_date = document.getElementById('delivery_date').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('delivery_details').value;
+
+            
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return false;
+            }
+
+           
+            const receipt = `
+                ----------Order Receipt---------
+                Name: ${name}
+                Phone: ${phone}
+                Tagline: ${tagline}
+                Size: ${size}
+                Quantity: ${quantity}
+                Delivery Date: ${delivery_date}
+                Email: ${email}
+                Address: ${address}
+                Receipt Date: ${new Date().toLocaleDateString()}
+            `;
+
+            alert(receipt);
+            return false; // Prevent the form from actually submitting
+        }
+    </script>
+</body>
+</html>
